@@ -6,7 +6,11 @@
         <title>Illia Rudyi</title>
     </head>
     <body>
-        <h1>Illia Rudyi</h1>
+        <div class="user-title">
+            <h1>Illia Rudyi</h1>
+            <button id="share-btn" onclick="shareOrCopy()">Share</button>
+        </div>
+
         <h2>Software engineer, web dev active</h2>
         <h3>I love to play and watch basketball, and PC games</h3>
 
@@ -40,5 +44,29 @@
             </li>
             <li><a href="mailto:contact@illiadot.dev">Email</a></li>
         </ul>
+
+        <style>
+            .user-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                column-gap: 2rem;
+            }
+        </style>
+
+        <script>
+            async function shareOrCopy() {
+                const url = location.href;
+                const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+                if (isMobile && navigator.share) {
+                    await navigator.share({ url });
+                } else {
+                    await navigator.clipboard.writeText(url);
+                    const btn = document.getElementById("share-btn");
+                    btn.textContent = "Copied!";
+                    setTimeout(() => (btn.textContent = "Share"), 2000);
+                }
+            }
+        </script>
     </body>
 </html>
