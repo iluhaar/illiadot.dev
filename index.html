@@ -4,68 +4,319 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <title>Illia Rudyi</title>
-    </head>
-    <body>
-        <div class="user-title">
-            <h1>Illia Rudyi</h1>
-            <button id="share-btn" onclick="shareOrCopy()">Share</button>
-        </div>
-
-        <h2>Software engineer, web dev active</h2>
-        <h3>I love to play and watch basketball, and PC games</h3>
-
-        <h2>Skills</h2>
-        <ul>
-            <li>JavaScript</li>
-            <li>TypeScript</li>
-            <li>React</li>
-            <li>Node.js</li>
-            <li>HTML/CSS</li>
-            <li>Git</li>
-        </ul>
-
-        <h2>Links</h2>
-
-        <ul>
-            <li>
-                <a href="https://github.com/iluhaar" target="_blank">GitHub</a>
-            </li>
-            <li>
-                <a href="https://bsky.app/profile/illiadot.dev" target="_blank"
-                    >Bluesky</a
-                >
-            </li>
-            <li>
-                <a
-                    href="https://www.linkedin.com/in/illia-rudyi/"
-                    target="_blank"
-                    >LinkedIn</a
-                >
-            </li>
-            <li><a href="mailto:contact@illiadot.dev">Email</a></li>
-        </ul>
-
+        <title>Illia Rudyi — Software Engineer</title>
+        <meta name="description" content="Software Engineer who architects complex frontend systems — composable UIs, 3D product configurators, and the data flows that connect them." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" />
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" /></noscript>
         <style>
-            .user-title {
+            *, *::before, *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            :root {
+                --bg: #faf8f5;
+                --text: #1a1816;
+                --muted: #6b6560;
+                --accent: #b5651d;
+                --border: #e8e3dc;
+                --font-serif: 'Lora', Georgia, serif;
+                --font-sans: system-ui, -apple-system, sans-serif;
+            }
+
+            body {
+                background: var(--bg);
+                color: var(--text);
+                font-family: var(--font-sans);
+                font-size: 1rem;
+                line-height: 1.7;
+                padding: 4rem 1.5rem 6rem;
+            }
+
+            .container {
+                max-width: 660px;
+                margin: 0 auto;
+            }
+
+            /* Hero */
+            .hero {
+                margin-bottom: 4rem;
+            }
+
+            .hero h1 {
+                font-family: var(--font-serif);
+                font-size: clamp(2rem, 6vw, 2.75rem);
+                font-weight: 600;
+                letter-spacing: -0.01em;
+                line-height: 1.2;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero .title {
+                font-family: var(--font-serif);
+                font-style: italic;
+                color: var(--muted);
+                font-size: 1.1rem;
+                margin-bottom: 1.25rem;
+            }
+
+            .hero .pitch {
+                font-size: 1.05rem;
+                line-height: 1.65;
+                max-width: 540px;
+                margin-bottom: 1.75rem;
+            }
+
+            .links {
                 display: flex;
-                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem 1.25rem;
                 align-items: center;
-                column-gap: 2rem;
+            }
+
+            .links a,
+            .contact-row a {
+                color: var(--accent);
+                text-decoration: none;
+                border-bottom: 1px solid transparent;
+                transition: border-color 0.15s;
+            }
+
+            .links a:hover,
+            .contact-row a:hover {
+                border-bottom-color: var(--accent);
+            }
+
+            .links a { font-size: 0.9rem; }
+            .contact-row a { font-size: 0.97rem; }
+
+            /* Sections */
+            section {
+                margin-bottom: 3.5rem;
+            }
+
+            section h2 {
+                font-family: var(--font-serif);
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--muted);
+                margin-bottom: 1.5rem;
+                padding-bottom: 0.6rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            /* Experience */
+            .job {
+                margin-bottom: 0.25rem;
+            }
+
+            .job-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .job-company {
+                font-family: var(--font-serif);
+                font-size: 1.05rem;
+                font-weight: 600;
+            }
+
+            .job-dates {
+                font-size: 0.85rem;
+                color: var(--muted);
+                white-space: nowrap;
+            }
+
+            .job-role {
+                font-style: italic;
+                color: var(--muted);
+                font-size: 0.95rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .job-desc {
+                font-size: 0.97rem;
+                line-height: 1.7;
+            }
+
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+                margin-top: 0.9rem;
+            }
+
+            .tag {
+                font-size: 0.78rem;
+                color: var(--muted);
+                background: var(--border);
+                padding: 0.2rem 0.6rem;
+                border-radius: 3px;
+                font-family: var(--font-sans);
+            }
+
+            /* Education */
+            .edu-item {
+                margin-bottom: 1rem;
+            }
+
+            .edu-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .edu-degree {
+                font-family: var(--font-serif);
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .edu-detail {
+                font-size: 0.9rem;
+                color: var(--muted);
+            }
+
+            /* Personal */
+            .personal-text {
+                font-size: 0.97rem;
+                line-height: 1.7;
+            }
+
+            /* Contact */
+            .contact-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            /* Share button */
+            #share-btn {
+                background: none;
+                border: 1px solid var(--border);
+                color: var(--muted);
+                font-family: var(--font-sans);
+                font-size: 0.82rem;
+                padding: 0.35rem 0.9rem;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: border-color 0.15s, color 0.15s;
+            }
+
+            #share-btn:hover {
+                border-color: var(--muted);
+                color: var(--text);
+            }
+
+            @media (max-width: 480px) {
+                body {
+                    padding: 2.5rem 1.25rem 4rem;
+                }
+
+                .job-header {
+                    flex-direction: column;
+                    gap: 0;
+                }
             }
         </style>
+    </head>
+    <body>
+        <div class="container">
+
+            <header class="hero">
+                <h1>Illia Rudyi</h1>
+                <p class="title">Software Engineer &mdash; Remote-friendly</p>
+                <p class="pitch">I architect complex frontend systems from scratch &mdash; composable UIs, 3D product configurators, and the data flows that connect them.</p>
+                <nav class="links">
+                    <a href="https://github.com/iluhaar" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/illia-rudyi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://bsky.app/profile/illiadot.dev" target="_blank" rel="noopener noreferrer">Bluesky</a>
+                    <a href="mailto:contact@illiadot.dev">Email</a>
+                </nav>
+            </header>
+
+            <section>
+                <h2>Experience</h2>
+                <div class="job">
+                    <div class="job-header">
+                        <span class="job-company">Zaelab</span>
+                        <span class="job-dates">Nov 2021 &ndash; Present</span>
+                    </div>
+                    <div class="job-role">Software Engineer</div>
+                    <p class="job-desc">
+                        Built composable UI systems and product configurator integrations for B2B e-commerce clients.
+                        Led frontend architecture from scratch — designing data flows, component systems, and integration
+                        layers between CPQ logic (Logik.io) and real-time 3D product visualization (Threekit, kBridge).
+                    </p>
+                    <div class="tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Logik.io</span>
+                        <span class="tag">Threekit</span>
+                        <span class="tag">kBridge</span>
+                        <span class="tag">Composable UI</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Education</h2>
+                <div class="edu-item">
+                    <div class="edu-degree">Master of Science, Computer Science</div>
+                    <div class="edu-detail">Volodymyr Dahl East Ukrainian National University</div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-degree">Bachelor of Science, Computer Science</div>
+                    <div class="edu-detail">Volodymyr Dahl East Ukrainian National University</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Personal</h2>
+                <p class="personal-text">
+                    Outside of work I follow basketball closely and play PC games.
+                    I enjoy the strategy side of both &mdash; reading the game, optimizing builds.
+                </p>
+            </section>
+
+            <section>
+                <h2>Contact</h2>
+                <div class="contact-row">
+                    <a href="mailto:contact@illiadot.dev">contact@illiadot.dev</a>
+                    <button id="share-btn" onclick="shareOrCopy()">Share this page</button>
+                </div>
+            </section>
+
+        </div>
 
         <script>
             async function shareOrCopy() {
                 const url = location.href;
-                const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-                if (isMobile && navigator.share) {
-                    await navigator.share({ url });
-                } else {
-                    await navigator.clipboard.writeText(url);
-                    const btn = document.getElementById("share-btn");
-                    btn.textContent = "Copied!";
-                    setTimeout(() => (btn.textContent = "Share"), 2000);
+                const btn = document.getElementById('share-btn');
+                try {
+                    if (navigator.share) {
+                        await navigator.share({ url });
+                    } else {
+                        await navigator.clipboard.writeText(url);
+                        btn.textContent = 'Copied!';
+                        setTimeout(() => (btn.textContent = 'Share this page'), 2000);
+                    }
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        btn.textContent = 'Copy failed';
+                        setTimeout(() => (btn.textContent = 'Share this page'), 2000);
+                    }
                 }
             }
         </script>
