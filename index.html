@@ -10,6 +10,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" />
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" /></noscript>
+        <script>
+            (function () {
+                var saved = localStorage.getItem('theme');
+                if (saved) document.documentElement.setAttribute('data-theme', saved);
+            })();
+        </script>
         <style>
             *, *::before, *::after {
                 box-sizing: border-box;
@@ -25,6 +31,14 @@
                 --border: #e8e3dc;
                 --font-serif: 'Lora', Georgia, serif;
                 --font-sans: system-ui, -apple-system, sans-serif;
+            }
+
+            [data-theme="dark"] {
+                --bg: #181614;
+                --text: #ede9e3;
+                --muted: #938e88;
+                --accent: #c98240;
+                --border: #2e2a26;
             }
 
             body {
@@ -52,7 +66,6 @@
                 font-weight: 600;
                 letter-spacing: -0.01em;
                 line-height: 1.2;
-                margin-bottom: 0.5rem;
             }
 
             .hero .title {
@@ -199,8 +212,9 @@
                 gap: 1rem;
             }
 
-            /* Share button */
-            #share-btn {
+            /* Shared button style */
+            #share-btn,
+            #theme-btn {
                 background: none;
                 border: 1px solid var(--border);
                 color: var(--muted);
@@ -212,9 +226,30 @@
                 transition: border-color 0.15s, color 0.15s;
             }
 
-            #share-btn:hover {
+            #share-btn:hover,
+            #theme-btn:hover {
                 border-color: var(--muted);
                 color: var(--text);
+            }
+
+            .hero-name-row {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-name-row h1 {
+                margin-bottom: 0;
+            }
+
+            #theme-btn {
+                font-size: 1rem;
+                padding: 0.25rem 0.55rem;
+                line-height: 1;
+                flex-shrink: 0;
+                align-self: center;
             }
 
             @media (max-width: 480px) {
@@ -233,7 +268,10 @@
         <div class="container">
 
             <header class="hero">
-                <h1>Illia Rudyi</h1>
+                <div class="hero-name-row">
+                    <h1>Illia Rudyi</h1>
+                    <button id="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()"></button>
+                </div>
                 <p class="title">Software Engineer &mdash; Remote-friendly</p>
                 <p class="pitch">I architect complex frontend systems from scratch &mdash; composable UIs, 3D product configurators, and the data flows that connect them.</p>
                 <nav class="links">
@@ -301,6 +339,31 @@
         </div>
 
         <script>
+            function getEffectiveTheme() {
+                var saved = localStorage.getItem('theme');
+                if (saved === 'dark' || saved === 'light') return saved;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                document.getElementById('theme-btn').textContent = theme === 'dark' ? '☀' : '☾';
+            }
+
+            function toggleTheme() {
+                var next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', next);
+                applyTheme(next);
+            }
+
+            applyTheme(getEffectiveTheme());
+
+            (window.requestIdleCallback || setTimeout)(function () {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+                    if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+                });
+            });
+
             async function shareOrCopy() {
                 const url = location.href;
                 const btn = document.getElementById('share-btn');
