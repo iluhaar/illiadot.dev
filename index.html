@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <title>Illia Rudyi — Software Engineer</title>
+        <title>Illia Rudyi — Senior Frontend Engineer</title>
         <meta name="description" content="Software Engineer who architects complex frontend systems — composable UIs, 3D product configurators, and the data flows that connect them." />
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,11 +149,25 @@
                 white-space: nowrap;
             }
 
+            .job-roles {
+                margin-bottom: 0.75rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.15rem;
+            }
+
+            .job-role-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+
             .job-role {
                 font-style: italic;
                 color: var(--muted);
                 font-size: 0.95rem;
-                margin-bottom: 0.75rem;
             }
 
             .job-desc {
@@ -272,7 +286,7 @@
                     <h1>Illia Rudyi</h1>
                     <button id="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()"></button>
                 </div>
-                <p class="title">Software Engineer &mdash; Remote-friendly</p>
+                <p class="title">Senior Frontend Engineer &mdash; Remote-friendly</p>
                 <p class="pitch">I architect complex frontend systems from scratch &mdash; composable UIs, 3D product configurators, and the data flows that connect them.</p>
                 <nav class="links">
                     <a href="https://github.com/iluhaar" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -289,7 +303,24 @@
                         <span class="job-company">Zaelab</span>
                         <span class="job-dates">Nov 2021 &ndash; Present</span>
                     </div>
-                    <div class="job-role">Software Engineer</div>
+                    <div class="job-roles">
+                        <div class="job-role-item">
+                            <span class="job-role">Senior Frontend Engineer</span>
+                            <span class="job-dates">Jan 2026 &ndash; Present</span>
+                        </div>
+                        <div class="job-role-item">
+                            <span class="job-role">Software Engineer</span>
+                            <span class="job-dates">Mar 2025 &ndash; Jan 2026</span>
+                        </div>
+                        <div class="job-role-item">
+                            <span class="job-role">Junior Front-end Engineer</span>
+                            <span class="job-dates">Feb 2022 &ndash; Mar 2025</span>
+                        </div>
+                        <div class="job-role-item">
+                            <span class="job-role">Intern</span>
+                            <span class="job-dates">Nov 2021 &ndash; Feb 2022</span>
+                        </div>
+                    </div>
                     <p class="job-desc">
                         Built composable UI systems and product configurator integrations for B2B e-commerce clients.
                         Led frontend architecture from scratch — designing data flows, component systems, and integration
