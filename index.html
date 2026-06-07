@@ -12,8 +12,22 @@
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" /></noscript>
         <script>
             (function () {
-                var saved = localStorage.getItem('theme');
-                if (saved) document.documentElement.setAttribute('data-theme', saved);
+                function getCookie(name) {
+                    var match = document.cookie.match(
+                        new RegExp('(?:^|; )' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)')
+                    );
+                    return match ? decodeURIComponent(match[1]) : null;
+                }
+
+                var saved = getCookie('theme') || localStorage.getItem('theme');
+                if (saved === 'dark' || saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                    return;
+                }
+
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
             })();
         </script>
         <style>
@@ -370,8 +384,25 @@
         </div>
 
         <script>
+            function getCookie(name) {
+                var match = document.cookie.match(
+                    new RegExp('(?:^|; )' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)')
+                );
+                return match ? decodeURIComponent(match[1]) : null;
+            }
+
+            function setThemeCookie(theme) {
+                var cookie = 'theme=' + encodeURIComponent(theme) + '; path=/; max-age=31536000; samesite=lax';
+
+                if (location.hostname === 'illiadot.dev' || location.hostname.endsWith('.illiadot.dev')) {
+                    cookie += '; domain=.illiadot.dev';
+                }
+
+                document.cookie = cookie;
+            }
+
             function getEffectiveTheme() {
-                var saved = localStorage.getItem('theme');
+                var saved = getCookie('theme') || localStorage.getItem('theme');
                 if (saved === 'dark' || saved === 'light') return saved;
                 return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             }
@@ -383,6 +414,7 @@
 
             function toggleTheme() {
                 var next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
+                setThemeCookie(next);
                 localStorage.setItem('theme', next);
                 applyTheme(next);
             }
@@ -391,7 +423,8 @@
 
             (window.requestIdleCallback || setTimeout)(function () {
                 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-                    if (!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark' : 'light');
+                    if (!getCookie('theme') && !localStorage.getItem('theme'))
+                        applyTheme(e.matches ? 'dark' : 'light');
                 });
             });
 
