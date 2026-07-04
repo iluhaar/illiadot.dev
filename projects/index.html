@@ -93,7 +93,9 @@
 
             function renderProjects() {
                 const projectList = document.getElementById('project-list');
-                projectList.innerHTML = projects.map(function (project) {
+                projectList.innerHTML = projects.slice().sort(function (a, b) {
+                    return a.order - b.order;
+                }).map(function (project) {
                     const demoLabel = project.demo && project.demo.includes('npmjs') ? 'Package' : 'Live';
                     const links = [
                         project.demo ? '<a href="' + project.demo + '" target="_blank" rel="noopener noreferrer">' + demoLabel + '</a>' : '',
