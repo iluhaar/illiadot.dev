@@ -24,7 +24,7 @@ const projects = [
     name: "Codex Usage Plugin for the OpenCode",
     status: "Source only",
     description:
-      "OpenCode plugin that exposes a /codex-usage TUI command and <leader>i shortcut for viewing Codex ChatGPT usage limits and credits. It also keeps a codex_usage tool for manual/debug agent use.",
+      "OpenCode plugin that exposes a /codex-usage TUI command and *leader-key** => i shortcut for viewing Codex ChatGPT usage limits and credits. It also keeps a codex_usage tool for manual/debug agent use.",
     github: "https://github.com/iluhaar/codex-usage-plugin",
     demo: "https://www.npmjs.com/package/@illiadotdev/codex-usage-plugin",
     tags: ["TypeScript"],
