@@ -2,7 +2,7 @@ const projects = [
   {
     order: 10,
     name: "illiadot.dev",
-    status: "Deployed",
+    status: "Source and deployed",
     description:
       "Personal website and resume, built as a lightweight static site.",
     github: "https://github.com/iluhaar/illiadot.dev",
@@ -28,5 +28,14 @@ const projects = [
     github: "https://github.com/iluhaar/codex-usage-plugin",
     demo: "https://www.npmjs.com/package/@illiadotdev/codex-usage-plugin",
     tags: ["TypeScript"],
+  },
+  {
+    order: 40,
+    name: "Linktree",
+    status: "Source and deployed",
+    description: "Personal linktree for my social media links.",
+    github: "https://github.com/iluhaar/linktree",
+    demo: "https://links.illiadot.dev/",
+    tags: ["HTML", "CSS"],
   },
 ];
