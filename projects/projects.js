@@ -38,4 +38,22 @@ const projects = [
     demo: "https://links.illiadot.dev/",
     tags: ["HTML", "CSS"],
   },
+  {
+    order: 50,
+    name: "Voice-to-Text Telegram Bot",
+    status: "Source only",
+    description: "A serverless Telegram bot that converts voice and circle video messages to text using OpenAI's Whisper API, deployed on Cloudflare Workers.",
+    github: "https://github.com/iluhaar/tg-bot-voice-to-text",
+    demo: "",
+    tags: ["JavaScript"],
+  },
+  {
+    order: 60,
+    name: "Money Tracker PWA",
+    status: "Source only",
+    description: "A Progressive Web Application to track expenses and savings with manual data entry, pie chart visualization, local storage with Google Sheets sync, and Google Sign-In authentication.",
+    github: "https://github.com/iluhaar/money-tracker",
+    demo: "",
+    tags: ["TypeScript", "Svelte", "HTML", "CSS"],
+  },
 ];
