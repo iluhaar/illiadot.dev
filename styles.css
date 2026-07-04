@@ -1,0 +1,363 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #faf8f5;
+    --text: #1a1816;
+    --muted: #6b6560;
+    --accent: #b5651d;
+    --border: #e8e3dc;
+    --font-serif: 'Lora', Georgia, serif;
+    --font-sans: system-ui, -apple-system, sans-serif;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+[data-theme="dark"] {
+    --bg: #181614;
+    --text: #ede9e3;
+    --muted: #938e88;
+    --accent: #c98240;
+    --border: #2e2a26;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    padding: 4rem 1.5rem 6rem;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: ease-out;
+}
+
+::view-transition-old(root) {
+    animation-name: page-fade-out;
+}
+
+::view-transition-new(root) {
+    animation-name: page-fade-in;
+}
+
+@keyframes page-fade-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-0.25rem);
+    }
+}
+
+@keyframes page-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.25rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    max-width: 660px;
+    margin: 0 auto;
+}
+
+/* Hero */
+.hero {
+    margin-bottom: 4rem;
+}
+
+.hero-name-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-name-row h1 {
+    margin-bottom: 0;
+}
+
+.hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.hero .title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+}
+
+.hero .pitch {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 540px;
+    margin-bottom: 1.75rem;
+}
+
+.links,
+.project-links,
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.links {
+    gap: 0.5rem 1.25rem;
+}
+
+.links a,
+.contact-row a,
+.project-links a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+
+.links a:hover,
+.contact-row a:hover,
+.project-links a:hover {
+    border-bottom-color: var(--accent);
+}
+
+.links a { font-size: 0.9rem; }
+.contact-row a { font-size: 0.97rem; }
+
+/* Sections */
+section {
+    margin-bottom: 3.5rem;
+}
+
+section h2 {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Experience */
+.job {
+    margin-bottom: 0.25rem;
+}
+
+.job-header,
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.2rem;
+}
+
+.job-company,
+.project-name {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.job-dates,
+.project-status {
+    font-size: 0.85rem;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.job-roles {
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.job-role-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.job-role {
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.job-desc,
+.project-desc {
+    font-size: 0.97rem;
+    line-height: 1.7;
+}
+
+.tags {
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+}
+
+.tag {
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    font-family: var(--font-sans);
+}
+
+/* Education */
+.edu-item {
+    margin-bottom: 1rem;
+}
+
+.edu-item:last-child {
+    margin-bottom: 0;
+}
+
+.edu-degree {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.edu-detail {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+/* Personal */
+.personal-text {
+    font-size: 0.97rem;
+    line-height: 1.7;
+}
+
+/* Projects */
+.project-list {
+    display: grid;
+    gap: 1.2rem;
+}
+
+.project {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.35rem;
+}
+
+.project:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.project-header {
+    gap: 0.35rem 1rem;
+    margin-bottom: 0.35rem;
+}
+
+.project-name {
+    font-size: 1.12rem;
+}
+
+.project-status {
+    font-size: 0.82rem;
+}
+
+.project-desc {
+    margin-bottom: 0.85rem;
+}
+
+.project-links {
+    gap: 0.45rem 1rem;
+    margin-bottom: 0.85rem;
+}
+
+.project-links a {
+    font-size: 0.9rem;
+}
+
+.project .tags {
+    margin-top: 0;
+}
+
+/* Contact */
+.contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Buttons */
+#share-btn,
+#theme-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+#share-btn:hover,
+#theme-btn:hover {
+    border-color: var(--muted);
+    color: var(--text);
+}
+
+#theme-btn {
+    font-size: 1rem;
+    padding: 0.25rem 0.55rem;
+    line-height: 1;
+    flex-shrink: 0;
+    align-self: center;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 2.5rem 1.25rem 4rem;
+    }
+
+    .job-header {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+}

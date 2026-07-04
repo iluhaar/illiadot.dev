@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>Projects — Illia Rudyi</title>
+        <meta name="description" content="Selected public projects by Illia Rudyi, including deployed experiments and open-source repositories." />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" />
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,400&display=swap" /></noscript>
+        <script>
+            (function () {
+                function getCookie(name) {
+                    var match = document.cookie.match(
+                        new RegExp('(?:^|; )' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)')
+                    );
+                    return match ? decodeURIComponent(match[1]) : null;
+                }
+
+                var saved = getCookie('theme') || localStorage.getItem('theme');
+                if (saved === 'dark' || saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', saved);
+                    return;
+                }
+
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            })();
+        </script>
+        <link rel="stylesheet" href="/styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <header class="hero">
+                <div class="hero-name-row">
+                    <h1>Projects</h1>
+                    <button id="theme-btn" aria-label="Toggle theme" onclick="toggleTheme()"></button>
+                </div>
+                <p class="title">Selected public work</p>
+                <p class="pitch">A curated list of projects, experiments, and open-source repositories. Some are deployed; others are kept as source-only references.</p>
+                <nav class="links">
+                    <a href="/">Home</a>
+                    <a href="https://github.com/iluhaar" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="mailto:contact@illiadot.dev">Email</a>
+                </nav>
+            </header>
+
+            <section>
+                <h2>Projects</h2>
+                <div id="project-list" class="project-list"></div>
+            </section>
+        </div>
+
+        <script>
+            const projects = [
+                {
+                    name: 'illiadot.dev',
+                    status: 'Deployed',
+                    description: 'Personal website and resume, built as a lightweight static site.',
+                    github: 'https://github.com/iluhaar/illiadot.dev',
+                    demo: 'https://illiadot.dev',
+                    tags: ['HTML', 'CSS', 'JavaScript']
+                },
+                {
+                    name: 'Project name',
+                    status: 'Source only',
+                    description: 'Replace this placeholder with a short description of what the project does and why it matters.',
+                    github: 'https://github.com/iluhaar',
+                    demo: '',
+                    tags: ['TypeScript', 'React']
+                }
+            ];
+
+            function getCookie(name) {
+                var match = document.cookie.match(
+                    new RegExp('(?:^|; )' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)')
+                );
+                return match ? decodeURIComponent(match[1]) : null;
+            }
+
+            function setThemeCookie(theme) {
+                var cookie = 'theme=' + encodeURIComponent(theme) + '; path=/; max-age=31536000; samesite=lax';
+
+                if (location.hostname === 'illiadot.dev' || location.hostname.endsWith('.illiadot.dev')) {
+                    cookie += '; domain=.illiadot.dev';
+                }
+
+                document.cookie = cookie;
+            }
+
+            function getEffectiveTheme() {
+                var saved = getCookie('theme') || localStorage.getItem('theme');
+                if (saved === 'dark' || saved === 'light') return saved;
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                document.getElementById('theme-btn').textContent = theme === 'dark' ? '☀' : '☾';
+            }
+
+            function toggleTheme() {
+                var next = getEffectiveTheme() === 'dark' ? 'light' : 'dark';
+                setThemeCookie(next);
+                localStorage.setItem('theme', next);
+                applyTheme(next);
+            }
+
+            function renderProjects() {
+                const projectList = document.getElementById('project-list');
+                projectList.innerHTML = projects.map(function (project) {
+                    const links = [
+                        project.demo ? '<a href="' + project.demo + '" target="_blank" rel="noopener noreferrer">Live</a>' : '',
+                        project.github ? '<a href="' + project.github + '" target="_blank" rel="noopener noreferrer">Source</a>' : ''
+                    ].filter(Boolean).join('');
+                    const tags = project.tags.map(function (tag) {
+                        return '<span class="tag">' + tag + '</span>';
+                    }).join('');
+
+                    return '<article class="project">'
+                        + '<div class="project-header">'
+                        + '<h3 class="project-name">' + project.name + '</h3>'
+                        + '<span class="project-status">' + project.status + '</span>'
+                        + '</div>'
+                        + '<p class="project-desc">' + project.description + '</p>'
+                        + (links ? '<div class="project-links">' + links + '</div>' : '')
+                        + '<div class="tags">' + tags + '</div>'
+                        + '</article>';
+                }).join('');
+            }
+
+            applyTheme(getEffectiveTheme());
+            renderProjects();
+
+            (window.requestIdleCallback || setTimeout)(function () {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+                    if (!getCookie('theme') && !localStorage.getItem('theme'))
+                        applyTheme(e.matches ? 'dark' : 'light');
+                });
+            });
+        </script>
+    </body>
+</html>
