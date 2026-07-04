@@ -94,8 +94,9 @@
             function renderProjects() {
                 const projectList = document.getElementById('project-list');
                 projectList.innerHTML = projects.map(function (project) {
+                    const demoLabel = project.demo && project.demo.includes('npmjs') ? 'Package' : 'Live';
                     const links = [
-                        project.demo ? '<a href="' + project.demo + '" target="_blank" rel="noopener noreferrer">Live</a>' : '',
+                        project.demo ? '<a href="' + project.demo + '" target="_blank" rel="noopener noreferrer">' + demoLabel + '</a>' : '',
                         project.github ? '<a href="' + project.github + '" target="_blank" rel="noopener noreferrer">Source</a>' : ''
                     ].filter(Boolean).join('');
                     const tags = project.tags.map(function (tag) {
