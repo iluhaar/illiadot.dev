@@ -1,0 +1,15 @@
+{
+  "name": "illiadot-dev",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npx serve .",
+    "build:blog": "node scripts/build-blog.mjs"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.11.1",
+    "marked": "^18.0.6",
+    "marked-highlight": "^2.2.4"
+  }
+}
