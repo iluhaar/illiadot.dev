@@ -1,0 +1,30 @@
+name: Verify blog release
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  verify-blog-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for blog changes
+        id: blog-changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            content:
+              - "content/blog/**"
+            release:
+              - "blog/**"
+
+      - name: Require generated blog changes
+        if: steps.blog-changes.outputs.content == 'true' && steps.blog-changes.outputs.release != 'true'
+        run: |
+          echo "::error::Blog content changed without a generated blog update. Run 'npm run build:blog' and commit the changes under blog/, or bypass this check if the post should not be released yet."
+          exit 1
