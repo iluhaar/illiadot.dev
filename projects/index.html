@@ -52,11 +52,115 @@
 
             <section>
                 <h2>Projects</h2>
-                <div id="project-list" class="project-list"></div>
+                <div class="project-list">
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">illiadot.dev</h3>
+                            <span class="project-status">Source and deployed</span>
+                        </div>
+                        <p class="project-desc">Personal website and resume, built as a lightweight static site.</p>
+                        <div class="project-links">
+                            <a href="https://illiadot.dev" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/iluhaar/illiadot.dev" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">dot_configs</h3>
+                            <span class="project-status">Source only</span>
+                        </div>
+                        <p class="project-desc">Source code for my dot config files for both Linux and Windows.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/iluhaar/dot_configs" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">PowerShell</span>
+                            <span class="tag">Lua</span>
+                            <span class="tag">Shell</span>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">Codex Usage Plugin for the OpenCode</h3>
+                            <span class="project-status">Source only</span>
+                        </div>
+                        <p class="project-desc">OpenCode plugin that exposes a /codex-usage TUI command and *leader-key* =&gt; i shortcut for viewing Codex ChatGPT usage limits and credits. It also keeps a codex_usage tool for manual/debug agent use.</p>
+                        <div class="project-links">
+                            <a href="https://www.npmjs.com/package/@illiadotdev/codex-usage-plugin" target="_blank" rel="noopener noreferrer">Package</a>
+                            <a href="https://github.com/iluhaar/codex-usage-plugin" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">TypeScript</span>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">Linktree</h3>
+                            <span class="project-status">Source and deployed</span>
+                        </div>
+                        <p class="project-desc">Personal linktree for my social media links.</p>
+                        <div class="project-links">
+                            <a href="https://links.illiadot.dev/" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/iluhaar/linktree" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">Voice-to-Text Telegram Bot</h3>
+                            <span class="project-status">Source only</span>
+                        </div>
+                        <p class="project-desc">A serverless Telegram bot that converts voice and circle video messages to text using OpenAI's Whisper API, deployed on Cloudflare Workers.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/iluhaar/tg-bot-voice-to-text" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">Money Tracker PWA</h3>
+                            <span class="project-status">Source only</span>
+                        </div>
+                        <p class="project-desc">A Progressive Web Application to track expenses and savings with manual data entry, pie chart visualization, local storage with Google Sheets sync, and Google Sign-In authentication.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/iluhaar/money-tracker" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">Svelte</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                    </article>
+                    <article class="project">
+                        <div class="project-header">
+                            <h3 class="project-name">URL Shortener</h3>
+                            <span class="project-status">Source and deployed</span>
+                        </div>
+                        <p class="project-desc">Private URL shortener with custom aliases, click counts, and link management, built on Cloudflare Workers and D1.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/iluhaar/url-shortener" target="_blank" rel="noopener noreferrer">Source</a>
+                        </div>
+                        <div class="tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                        </div>
+                    </article>
+                </div>
             </section>
         </div>
 
-        <script src="/projects/projects.js"></script>
         <script>
             function getCookie(name) {
                 var match = document.cookie.match(
@@ -93,34 +197,7 @@
                 applyTheme(next);
             }
 
-            function renderProjects() {
-                const projectList = document.getElementById('project-list');
-                projectList.innerHTML = projects.slice().sort(function (a, b) {
-                    return a.order - b.order;
-                }).map(function (project) {
-                    const demoLabel = project.demo && project.demo.includes('npmjs') ? 'Package' : 'Live';
-                    const links = [
-                        project.demo ? '<a href="' + project.demo + '" target="_blank" rel="noopener noreferrer">' + demoLabel + '</a>' : '',
-                        project.github ? '<a href="' + project.github + '" target="_blank" rel="noopener noreferrer">Source</a>' : ''
-                    ].filter(Boolean).join('');
-                    const tags = project.tags.map(function (tag) {
-                        return '<span class="tag">' + tag + '</span>';
-                    }).join('');
-
-                    return '<article class="project">'
-                        + '<div class="project-header">'
-                        + '<h3 class="project-name">' + project.name + '</h3>'
-                        + '<span class="project-status">' + project.status + '</span>'
-                        + '</div>'
-                        + '<p class="project-desc">' + project.description + '</p>'
-                        + (links ? '<div class="project-links">' + links + '</div>' : '')
-                        + '<div class="tags">' + tags + '</div>'
-                        + '</article>';
-                }).join('');
-            }
-
             applyTheme(getEffectiveTheme());
-            renderProjects();
 
             (window.requestIdleCallback || setTimeout)(function () {
                 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
